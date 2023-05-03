@@ -1,20 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import SignIn from "./screens/SignIn";
+import SignUp from "./screens/SignUp";
+import Home from "./screens/Home";
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.background}>
+      <View style={styles.navigationContainerWrapper}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="SignIn"
+              component={SignIn}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="SignUp"
+              component={SignUp}
+              options={{ title: "Sign Up" }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ title: "Home" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
+    alignItems: "center",
+    backgroundColor: "#E9F2E2",
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    width: "100%",
+  },
+  navigationContainerWrapper: {
+    flex: 1,
+    maxWidth: 400,
+    width: "100%",
   },
 });
+
+export default App;
